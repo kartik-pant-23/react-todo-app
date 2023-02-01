@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Navbar from "./components/navbar";
-import AddTodo from "./components/addTodo";
 import TasksList from "./components/tasksList";
 import SideNav from "./components/sidenav";
 
@@ -14,7 +13,9 @@ import _size from "lodash/size";
 
 function TodoMainScreen() {
   const [tasks, setTasks] = useState([]);
-  const [isSideNavExpanded, setIsSideNavExpanded] = useState(true);
+  const [isSideNavExpanded, setIsSideNavExpanded] = useState(
+    window.innerWidth > 800
+  );
 
   const handleAddNewTask = (task) => {
     setTasks((prevTasks) => [
@@ -69,12 +70,10 @@ function TodoMainScreen() {
       />
 
       <div className='app-body row g-0'>
-        {isSideNavExpanded ? (
+        {isSideNavExpanded && (
           <div className='col-md-3 col-sm-6 col-xsm-12'>
             <SideNav onAddNewTask={handleAddNewTask} />
           </div>
-        ) : (
-          <div></div>
         )}
 
         <div
@@ -93,21 +92,5 @@ function TodoMainScreen() {
     </div>
   );
 }
-
-// <div className='main-content container mx-auto'>
-//   <div className='row g-2'>
-//     <div className='col-md-4'>
-//       <AddTodo onAddNewTask={handleAddNewTask} />
-//     </div>
-//     <div className='col'>
-//       <TasksList
-//         tasks={tasks}
-//         onDeleteTask={handleDeleteTask}
-//         onDeleteCompletedTasks={handleDeleteCompletedTasks}
-//         onUpdateTask={handleUpdateTask}
-//       />
-//     </div>
-//   </div>
-// </div>
 
 export default TodoMainScreen;

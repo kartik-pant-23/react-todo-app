@@ -7,7 +7,9 @@ import _get from "lodash/get";
 import _map from "lodash/map";
 import _reject from "lodash/reject";
 
-function AddTodo({ onAddNewTask }) {
+import "./AddTodo.css";
+
+function AddTodo({ onAddNewTask, onCloseModal }) {
   const defaultTaskState = {
     title: "",
     description: "",
@@ -32,6 +34,7 @@ function AddTodo({ onAddNewTask }) {
       createdAt: new Date(),
     });
     setTask(defaultTaskState);
+    onCloseModal();
   };
 
   // functions related to sub-tasks ----------------------------------------
@@ -67,61 +70,70 @@ function AddTodo({ onAddNewTask }) {
   // ----------------------------------------------------------------------------
 
   return (
-    <form
-      className='p-3 bg-light rounded'
-      onSubmit={handleAddTaskButtonClicked}
-    >
-      <h5 className='text-capitalize'>
-        <i className='fa fa-plus'></i> Add your task
-      </h5>
+    <div className='h-100 d-flex flex-column align-items-end'>
+      <button className='modal-header btn btn-lg' onClick={onCloseModal}>
+        <i className='fa fa-close'></i>
+      </button>
 
-      <p className='text-muted'>
-        Get started by adding task title and other details can be added later.
-      </p>
+      <form
+        className='modal-body container-fluid'
+        onSubmit={handleAddTaskButtonClicked}
+      >
+        <div className='modal-body__main p-3 bg-light rounded'>
+          <h5 className='text-capitalize'>
+            <i className='fa fa-plus'></i> Add your task
+          </h5>
 
-      <div className='form-group mt-4'>
-        <input
-          type='text'
-          name='title'
-          id='title'
-          value={task.title}
-          onChange={handleInputChange}
-          className='form-control'
-          placeholder='Eg: Complete login functionality'
-          autoCapitalize='words'
-          autoFocus
-          required
-        />
+          <p className='text-muted'>
+            Get started by adding task title and other details can be added
+            later.
+          </p>
 
-        <textarea
-          name='description'
-          id='description'
-          value={task.description}
-          cols='30'
-          rows='4'
-          placeholder='Eg: Add the jsonwebtoken package to return authentication tokens.'
-          className='form-control mt-2'
-          onChange={handleInputChange}
-        ></textarea>
+          <div className='form-group mt-4'>
+            <input
+              type='text'
+              name='title'
+              id='title'
+              value={task.title}
+              onChange={handleInputChange}
+              className='form-control'
+              placeholder='Eg: Complete login functionality'
+              autoCapitalize='words'
+              autoFocus
+              required
+            />
 
-        <SubTasks
-          subTasks={task.subTasks}
-          onAddNewSubTask={handleAddNewSubTask}
-          onSubTaskChange={handleUpdateSubTask}
-          onDeleteSubTask={handleDeleteSubTask}
-        />
-      </div>
+            <textarea
+              name='description'
+              id='description'
+              value={task.description}
+              cols='30'
+              rows='4'
+              placeholder='Eg: Add the jsonwebtoken package to return authentication tokens.'
+              className='form-control mt-2'
+              onChange={handleInputChange}
+            ></textarea>
 
-      <div className='text-end mt-2'>
-        <button
-          className='btn btn-primary'
-          disabled={task.title.length === 0}
-          type='submit'
-        >
-          <i className='fa fa-check'></i> Add Task
-        </button>
-      </div>
-    </form>
+            <SubTasks
+              subTasks={task.subTasks}
+              onAddNewSubTask={handleAddNewSubTask}
+              onSubTaskChange={handleUpdateSubTask}
+              onDeleteSubTask={handleDeleteSubTask}
+            />
+          </div>
+        </div>
+
+        <div className='modal-body__footer text-end float-right'>
+          <button
+            className='btn btn-primary'
+            disabled={task.title.length === 0}
+            type='submit'
+          >
+            <i className='fa fa-check'></i> Add Task
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
 
