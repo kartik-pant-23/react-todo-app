@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import classNames from "classnames";
 
 import _get from "lodash/get";
+import _find from "lodash/find";
 
 import AddTodoModal from "react-modal";
 import AddTodo from "../addTodo";
@@ -66,7 +67,17 @@ function SideNav({ onAddNewTask, priorityFilter, onChangePriorityFilter }) {
         appElement={document.getElementById("root")}
         portalClassName=''
       >
-        <AddTodo onAddNewTask={onAddNewTask} onCloseModal={handleCloseModal} />
+        <AddTodo
+          onAddNewTask={onAddNewTask}
+          onCloseModal={handleCloseModal}
+          defaultPriority={
+            _get(priorityFilter, "all")
+              ? "low"
+              : _find(Object.keys(priorityFilter), (value) =>
+                  _get(priorityFilter, value)
+                )
+          }
+        />
       </AddTodoModal>
     </nav>
   );

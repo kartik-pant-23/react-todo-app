@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SubTasks from "./components/subTasks";
 
 import uuid from "react-uuid";
@@ -12,15 +12,20 @@ import PrioritySelect from "react-select";
 
 import "./AddTodo.css";
 
-function AddTodo({ onAddNewTask, onCloseModal }) {
+function AddTodo({ onAddNewTask, onCloseModal, defaultPriority }) {
   const defaultTaskState = {
     title: "",
     description: "",
     subTasks: [],
-    completed: false,
-    priority: "low",
   };
   const [task, setTask] = useState(defaultTaskState);
+
+  useEffect(() => {
+    setTask((prevTask) => ({
+      ...prevTask,
+      priority: defaultPriority,
+    }));
+  }, [defaultPriority]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
