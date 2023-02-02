@@ -15,6 +15,7 @@ function AddTodo({ onAddNewTask, onCloseModal }) {
     description: "",
     subTasks: [],
     completed: false,
+    priority: "low",
   };
   const [task, setTask] = useState(defaultTaskState);
 
@@ -89,38 +90,54 @@ function AddTodo({ onAddNewTask, onCloseModal }) {
             later.
           </p>
 
-          <div className='form-group mt-4'>
-            <input
-              type='text'
-              name='title'
-              id='title'
-              value={task.title}
-              onChange={handleInputChange}
-              className='form-control'
-              placeholder='Eg: Complete login functionality'
-              autoCapitalize='words'
-              autoFocus
-              required
-            />
+          <div className='row align-items-end g-2'>
+            <div className='col-md-9'>
+              <input
+                type='text'
+                name='title'
+                id='title'
+                value={task.title}
+                onChange={handleInputChange}
+                className='form-control'
+                placeholder='Eg: Complete login functionality'
+                autoCapitalize='words'
+                autoFocus
+                required
+              />
+            </div>
 
-            <textarea
-              name='description'
-              id='description'
-              value={task.description}
-              cols='30'
-              rows='4'
-              placeholder='Eg: Add the jsonwebtoken package to return authentication tokens.'
-              className='form-control mt-2'
-              onChange={handleInputChange}
-            ></textarea>
-
-            <SubTasks
-              subTasks={task.subTasks}
-              onAddNewSubTask={handleAddNewSubTask}
-              onSubTaskChange={handleUpdateSubTask}
-              onDeleteSubTask={handleDeleteSubTask}
-            />
+            <div className='form-group col-md-3'>
+              <label htmlFor='priority'>Priority</label>
+              <select
+                name='priority'
+                id='priority'
+                className='form-control'
+                onChange={handleInputChange}
+              >
+                <option value='low'>Low</option>
+                <option value='medium'>Medium</option>
+                <option value='high'>High</option>
+              </select>
+            </div>
           </div>
+
+          <textarea
+            name='description'
+            id='description'
+            value={task.description}
+            cols='30'
+            rows='4'
+            placeholder='Eg: Add the jsonwebtoken package to return authentication tokens.'
+            className='form-control mt-2'
+            onChange={handleInputChange}
+          ></textarea>
+
+          <SubTasks
+            subTasks={task.subTasks}
+            onAddNewSubTask={handleAddNewSubTask}
+            onSubTaskChange={handleUpdateSubTask}
+            onDeleteSubTask={handleDeleteSubTask}
+          />
         </div>
 
         <div className='modal-body__footer text-end float-right'>
