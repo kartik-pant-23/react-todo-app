@@ -6,6 +6,9 @@ import uuid from "react-uuid";
 import _get from "lodash/get";
 import _map from "lodash/map";
 import _reject from "lodash/reject";
+import _filter from "lodash/filter";
+
+import PrioritySelect from "react-select";
 
 import "./AddTodo.css";
 
@@ -70,6 +73,16 @@ function AddTodo({ onAddNewTask, onCloseModal }) {
   };
   // ----------------------------------------------------------------------------
 
+  const priorityOptions = [
+    { label: "Low", value: "low" },
+    { label: "Medium", value: "medium" },
+    { label: "High", value: "high" },
+  ];
+
+  const handlePriorityChanged = ({ value }) => {
+    handleInputChange({ target: { name: "priority", value } });
+  };
+
   return (
     <div className='h-100 d-flex flex-column align-items-end'>
       <button className='modal-header btn btn-lg' onClick={onCloseModal}>
@@ -108,16 +121,11 @@ function AddTodo({ onAddNewTask, onCloseModal }) {
 
             <div className='form-group col-md-3'>
               <label htmlFor='priority'>Priority</label>
-              <select
-                name='priority'
-                id='priority'
-                className='form-control'
-                onChange={handleInputChange}
-              >
-                <option value='low'>Low</option>
-                <option value='medium'>Medium</option>
-                <option value='high'>High</option>
-              </select>
+              <PrioritySelect
+                options={priorityOptions}
+                value={_filter(priorityOptions, ["value", task.priority])}
+                onChange={handlePriorityChanged}
+              />
             </div>
           </div>
 
