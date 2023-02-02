@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 
+import classNames from "classnames";
+
+import _get from "lodash/get";
+
 import AddTodoModal from "react-modal";
 import AddTodo from "../addTodo";
 
-function SideNav({ onAddNewTask }) {
+function SideNav({ onAddNewTask, priorityFilter, onChangePriorityFilter }) {
   const [showModal, setShowMadal] = useState(false);
 
   const modalStyle = {
@@ -32,21 +36,21 @@ function SideNav({ onAddNewTask }) {
   return (
     <nav className='h-100 p-4'>
       <div>
-        <h6 className='text-uppercase text-muted mb-3'>Filter By</h6>
+        <h6 className='text-uppercase text-muted mb-3'>Filter By Priority</h6>
 
         <ul className='nav nav-pills nav-fill flex-column'>
-          <li className='nav-item'>
-            <button className='nav-link active'>All</button>
-          </li>
-          <li className='nav-item'>
-            <button className='nav-link'>Important</button>
-          </li>
-          <li className='nav-item'>
-            <button className='nav-link'>Home</button>
-          </li>
-          <li className='nav-item'>
-            <button className='nav-link'>Work</button>
-          </li>
+          {Object.keys(priorityFilter).map((filterValue) => (
+            <li className='nav-item' key={filterValue}>
+              <button
+                className={classNames("text-capitalize", "nav-link", {
+                  active: _get(priorityFilter, filterValue),
+                })}
+                onClick={() => onChangePriorityFilter(filterValue)}
+              >
+                {filterValue}
+              </button>
+            </li>
+          ))}
         </ul>
       </div>
 

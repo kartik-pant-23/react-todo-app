@@ -51,9 +51,12 @@ function TaskItem({ task, onDeleteTask, onUpdateTask }) {
             </h5>
           </div>
           <div
-            className={`priority priority-${_classNames({
-              [_get(task, "priority")]: true,
-            })}`}
+            className={classNames(
+              "priority",
+              `priority-${_classNames({
+                [_get(task, "priority")]: true,
+              })}`
+            )}
           >
             {task.priority}
           </div>

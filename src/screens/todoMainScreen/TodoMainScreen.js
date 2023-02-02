@@ -16,6 +16,12 @@ function TodoMainScreen() {
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(
     window.innerWidth > 800
   );
+  const [priorityFilter, setPriorityFilter] = useState({
+    all: true,
+    high: false,
+    medium: false,
+    low: false,
+  });
 
   const handleAddNewTask = (task) => {
     setTasks((prevTasks) => [
@@ -25,6 +31,16 @@ function TodoMainScreen() {
       },
       ...prevTasks,
     ]);
+  };
+
+  const handleChangePriorityFilter = (priority) => {
+    setPriorityFilter((prevPriorityFilter) => {
+      const newPriorityFilter = {};
+      Object.keys(prevPriorityFilter).forEach((filterValue) => {
+        newPriorityFilter[filterValue] = priority === filterValue;
+      });
+      return newPriorityFilter;
+    });
   };
 
   const handleSideNavStateChanged = (expanded) => {
@@ -72,7 +88,11 @@ function TodoMainScreen() {
       <div className='app-body row g-0'>
         {isSideNavExpanded && (
           <div className='col-md-3 col-sm-6 col-xsm-12'>
-            <SideNav onAddNewTask={handleAddNewTask} />
+            <SideNav
+              onAddNewTask={handleAddNewTask}
+              priorityFilter={priorityFilter}
+              onChangePriorityFilter={handleChangePriorityFilter}
+            />
           </div>
         )}
 
@@ -82,7 +102,13 @@ function TodoMainScreen() {
           }`}
         >
           <TasksList
-            tasks={tasks}
+            tasks={_filter(
+              tasks,
+              (task) =>
+                _get(priorityFilter, "all") ||
+                _get(priorityFilter, _get(task, "priority"))
+            )}
+            priorityFilter={priorityFilter}
             onDeleteTask={handleDeleteTask}
             onDeleteCompletedTasks={handleDeleteCompletedTasks}
             onUpdateTask={handleUpdateTask}
