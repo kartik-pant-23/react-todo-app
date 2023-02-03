@@ -8,6 +8,8 @@ import _find from "lodash/find";
 import AddTodoModal from "react-modal";
 import AddTodo from "../addTodo";
 
+import "./SideNav.css";
+
 function SideNav({ onAddNewTask, priorityFilter, onChangePriorityFilter }) {
   const [showModal, setShowMadal] = useState(false);
 
@@ -35,7 +37,7 @@ function SideNav({ onAddNewTask, priorityFilter, onChangePriorityFilter }) {
   };
 
   return (
-    <nav className='h-100 p-4'>
+    <nav className='side-nav h-100 p-4'>
       <div>
         <h6 className='text-uppercase text-muted mb-3'>Filter By Priority</h6>
 
