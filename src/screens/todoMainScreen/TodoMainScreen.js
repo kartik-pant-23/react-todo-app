@@ -11,6 +11,8 @@ import _get from "lodash/get";
 import _map from "lodash/map";
 import _size from "lodash/size";
 
+import "./TodoMainScreen.css";
+
 function TodoMainScreen() {
   const [tasks, setTasks] = useState([]);
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(
