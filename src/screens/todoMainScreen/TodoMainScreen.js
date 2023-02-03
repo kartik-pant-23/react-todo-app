@@ -75,7 +75,15 @@ function TodoMainScreen() {
   };
 
   const handleDeleteCompletedTasks = () => {
-    setTasks((prevTasks) => _reject(prevTasks, "completed"));
+    setTasks((prevTasks) =>
+      _reject(
+        prevTasks,
+        (value) =>
+          _get(value, "completed") &&
+          (_get(priorityFilter, "all") ||
+            _get(priorityFilter, _get(value, "priority")))
+      )
+    );
   };
 
   return (
