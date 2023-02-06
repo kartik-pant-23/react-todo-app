@@ -108,7 +108,7 @@ function TodoMainScreen() {
 
         <div
           className={`${
-            isSideNavExpanded ? "col-md-9 col-sm-6 col-xsm-12" : "col-xsm-12"
+            isSideNavExpanded ? "col-md-9 col-sm-6 col-xsm-12" : "col-md-12"
           }`}
         >
           <TasksList

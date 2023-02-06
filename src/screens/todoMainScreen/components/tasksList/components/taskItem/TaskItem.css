@@ -1,3 +1,18 @@
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.card-body--header {
+  display: flex;
+  align-items: center;
+}
+.card-title {
+  margin: 0;
+  margin-left: 0.25rem;
+}
+
 .task_item--checked {
   text-decoration: line-through;
 }
@@ -25,4 +40,8 @@
 .priority-high {
   color: rgb(169, 0, 0);
   background-color: rgb(255, 0, 0, 0.25);
+}
+
+.subtask-section {
+  margin-bottom: 1.25rem;
 }

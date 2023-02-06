@@ -26,10 +26,11 @@ function TaskItem({ task, onDeleteTask, onUpdateTask }) {
   const _classNames = classNames.bind(priorityStyles);
 
   return (
-    <div className='col-lg-4 col-md-6 col-sm-12'>
+    // <div className='col-lg-4 col-md-6 col-sm-12'>
+    <div className='task-container'>
       <div className='card border-0'>
         <div className='card-body'>
-          <div className='d-flex align-items-center'>
+          <div className='card-body--header d-flex align-items-center'>
             <input
               type='checkbox'
               name='checked'
@@ -63,7 +64,7 @@ function TaskItem({ task, onDeleteTask, onUpdateTask }) {
           <p className='card-text text-muted my-2'>
             {task.description || "No description added"}
           </p>
-          <div>
+          <div className='subtask-section'>
             {_map(_get(task, "subTasks"), (subTask) => (
               <SubTaskItem
                 subTask={subTask}
