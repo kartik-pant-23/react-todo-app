@@ -1,20 +1,29 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+}
+
 .modal-header {
-  height: 10%;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-bottom: 0;
+  margin-left: auto;
+  width: fit-content;
 }
 
 .modal-body {
-  height: 90%;
+  height: 432px;
   padding: 1rem;
   padding-top: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+}
+
+.title {
+  margin-right: 0.75rem;
 }
 
 .modal-body__main {
   height: 85%;
   overflow: scroll;
+}
+
+.modal-body__footer {
+  margin-top: 2rem;
+  text-align: end;
 }

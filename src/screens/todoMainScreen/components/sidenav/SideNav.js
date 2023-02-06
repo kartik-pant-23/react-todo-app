@@ -22,7 +22,7 @@ function SideNav({ onAddNewTask, priorityFilter, onChangePriorityFilter }) {
       boxShadow: "0 0 16px rgba(0,0,0,0.25)",
       margin: "auto",
       height: "500px",
-      maxWidth: "850px",
+      width: "850px",
       borderRadius: "0",
       padding: "0.5rem",
     },
@@ -57,7 +57,7 @@ function SideNav({ onAddNewTask, priorityFilter, onChangePriorityFilter }) {
         </ul>
       </div>
 
-      <button className='btn-tonal rounded mt-5' onClick={handleShowModal}>
+      <button className='btn btn-tonal rounded mt-5' onClick={handleShowModal}>
         <i className='fa fa-plus-circle'></i> Add To-do
       </button>
 

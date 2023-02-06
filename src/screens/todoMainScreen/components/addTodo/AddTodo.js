@@ -89,7 +89,7 @@ function AddTodo({ onAddNewTask, onCloseModal, defaultPriority }) {
   };
 
   return (
-    <div className='h-100 d-flex flex-column align-items-end'>
+    <div className='modal'>
       <button className='modal-header btn btn-lg' onClick={onCloseModal}>
         <i className='fa fa-close'></i>
       </button>
@@ -108,21 +108,19 @@ function AddTodo({ onAddNewTask, onCloseModal, defaultPriority }) {
             later.
           </p>
 
-          <div className='row align-items-end g-2'>
-            <div className='col-md-9'>
-              <input
-                type='text'
-                name='title'
-                id='title'
-                value={task.title}
-                onChange={handleInputChange}
-                className='form-control'
-                placeholder='Eg: Complete login functionality'
-                autoCapitalize='words'
-                autoFocus
-                required
-              />
-            </div>
+          <div className='mb-2 row align-items-end g-2'>
+            <input
+              type='text'
+              name='title'
+              id='title'
+              value={task.title}
+              onChange={handleInputChange}
+              className='title form-control'
+              placeholder='Eg: Complete login functionality'
+              autoCapitalize='words'
+              autoFocus
+              required
+            />
 
             <div className='form-group col-md-3'>
               <label htmlFor='priority'>Priority</label>
@@ -134,16 +132,18 @@ function AddTodo({ onAddNewTask, onCloseModal, defaultPriority }) {
             </div>
           </div>
 
-          <textarea
-            name='description'
-            id='description'
-            value={task.description}
-            cols='30'
-            rows='4'
-            placeholder='Eg: Add the jsonwebtoken package to return authentication tokens.'
-            className='form-control mt-2'
-            onChange={handleInputChange}
-          ></textarea>
+          <div className='row mb-2'>
+            <textarea
+              name='description'
+              id='description'
+              value={task.description}
+              cols='30'
+              rows='4'
+              placeholder='Eg: Add the jsonwebtoken package to return authentication tokens.'
+              className='form-control mt-2'
+              onChange={handleInputChange}
+            ></textarea>
+          </div>
 
           <SubTasks
             subTasks={task.subTasks}
