@@ -2,6 +2,8 @@ import React from "react";
 import "./TaskItem.css";
 import SubTaskItem from "./components/subTaskItem";
 
+import Button from "../../../../../../components/button";
+
 import _map from "lodash/map";
 import _get from "lodash/get";
 
@@ -73,12 +75,18 @@ function TaskItem({ task, onDeleteTask, onUpdateTask }) {
               />
             ))}
           </div>
-          <button
+          <Button
+            buttonText='Delete'
+            onClick={() => onDeleteTask(task.id)}
+            buttonType='BUTTON_OUTLINE_DANGER'
+            isButtonSmall={true}
+          />
+          {/* <button
             className='btn btn-outline-danger btn-sm mt-3'
             onClick={() => onDeleteTask(task.id)}
           >
             Delete
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

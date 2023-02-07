@@ -19,11 +19,14 @@
 }
 
 .modal-body__main {
-  height: 85%;
+  height: 352px;
   overflow: scroll;
+  background: #f8f8f8;
+  padding: 1rem;
+  border-radius: 8px;
 }
 
 .modal-body__footer {
-  margin-top: 2rem;
+  margin-top: 1rem;
   text-align: end;
 }

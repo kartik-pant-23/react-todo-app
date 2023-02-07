@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SubTasks from "./components/subTasks";
+import Button from "../../../../components/button";
 
 import uuid from "react-uuid";
 
@@ -154,13 +155,18 @@ function AddTodo({ onAddNewTask, onCloseModal, defaultPriority }) {
         </div>
 
         <div className='modal-body__footer text-end float-right'>
-          <button
+          <Button
+            buttonText='Add Todo'
+            type='submit'
+            disabled={task.title.length === 0}
+          />
+          {/* <button
             className='btn btn-primary'
             disabled={task.title.length === 0}
             type='submit'
           >
             <i className='fa fa-check'></i> Add Task
-          </button>
+          </button> */}
         </div>
       </form>
     </div>

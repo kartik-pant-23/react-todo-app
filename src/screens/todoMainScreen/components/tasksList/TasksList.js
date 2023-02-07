@@ -1,6 +1,8 @@
 import React from "react";
 import TaskItem from "./components/taskItem";
 
+import Button from "../../../../components/button";
+
 import _map from "lodash/map";
 
 import "./TasksList.css";
@@ -29,9 +31,14 @@ function TasksList({
           <i className='fa fa-list-check'></i> Tasks List
         </h5>
 
-        <button className='btn btn-danger' onClick={onDeleteCompletedTasks}>
+        <Button
+          buttonText='Deleted Completed Tasks'
+          onClick={onDeleteCompletedTasks}
+          buttonType='BUTTON_DANGER'
+        />
+        {/* <button className='btn btn-danger' onClick={onDeleteCompletedTasks}>
           <i className='fa fa-trash'></i> Delete Completed Tasks
-        </button>
+        </button> */}
       </div>
 
       {tasks.length === 0 ? (
