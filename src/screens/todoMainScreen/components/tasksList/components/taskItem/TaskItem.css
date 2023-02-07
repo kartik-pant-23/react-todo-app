@@ -1,45 +1,56 @@
+.task-container {
+  width: calc(33% - 0.4rem);
+}
+
 .card {
+  height: calc(100% - 32px);
+  width: calc(100% - 32px);
   background: white;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .card-body--header {
   display: flex;
   align-items: center;
 }
+.card-body--header > input {
+  margin-top: 0.4rem;
+}
 .card-title {
-  margin: 0;
-  margin-left: 0.25rem;
+  margin: 0 0.25rem;
 }
-
-.task_item--checked {
-  text-decoration: line-through;
-}
-
 .priority {
   font-size: 0.8rem;
   background-color: gray;
   border: none;
   border-radius: 8px;
   display: inline-block;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  margin-top: 0.5rem;
 }
-
 .priority-low {
   color: rgb(0, 119, 0);
   background-color: rgba(0, 255, 0, 0.25);
 }
-
 .priority-medium {
   color: rgb(0, 0, 255);
   background-color: rgba(0, 0, 253, 0.25);
 }
-
 .priority-high {
   color: rgb(169, 0, 0);
   background-color: rgb(255, 0, 0, 0.25);
+}
+
+.task_item--checked {
+  text-decoration: line-through;
+}
+
+.task-item-btn {
+  width: fit-content;
 }
 
 .subtask-section {

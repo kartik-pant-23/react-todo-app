@@ -32,7 +32,7 @@ function TaskItem({ task, onDeleteTask, onUpdateTask }) {
     <div className='task-container'>
       <div className='card border-0'>
         <div className='card-body'>
-          <div className='card-body--header d-flex align-items-center'>
+          <div className='card-body--header d-flex align-items-start'>
             <input
               type='checkbox'
               name='checked'
@@ -45,6 +45,7 @@ function TaskItem({ task, onDeleteTask, onUpdateTask }) {
                 })
               }
             />
+
             <h5
               className={`card-title text-capitalize m-0 ms-2 ${classNames({
                 "text-muted task_item--checked": _get(task, "completed"),
@@ -53,6 +54,7 @@ function TaskItem({ task, onDeleteTask, onUpdateTask }) {
               {task.title}
             </h5>
           </div>
+
           <div
             className={classNames(
               "priority",
@@ -63,6 +65,7 @@ function TaskItem({ task, onDeleteTask, onUpdateTask }) {
           >
             {task.priority}
           </div>
+
           <p className='card-text text-muted my-2'>
             {task.description || "No description added"}
           </p>
@@ -75,19 +78,14 @@ function TaskItem({ task, onDeleteTask, onUpdateTask }) {
               />
             ))}
           </div>
-          <Button
-            buttonText='Delete'
-            onClick={() => onDeleteTask(task.id)}
-            buttonType='BUTTON_OUTLINE_DANGER'
-            isButtonSmall={true}
-          />
-          {/* <button
-            className='btn btn-outline-danger btn-sm mt-3'
-            onClick={() => onDeleteTask(task.id)}
-          >
-            Delete
-          </button> */}
         </div>
+        <Button
+          buttonText='Delete'
+          onClick={() => onDeleteTask(task.id)}
+          buttonType='BUTTON_OUTLINE_DANGER'
+          className='task-item-btn'
+          isButtonSmall={true}
+        />
       </div>
     </div>
   );

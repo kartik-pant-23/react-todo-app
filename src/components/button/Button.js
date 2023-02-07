@@ -9,6 +9,7 @@ function Button({
   disabled = false,
   buttonType = "BUTTON_PRIMARY",
   isButtonSmall = false,
+  className = "",
 }) {
   const btn_class = cx({
     "btn-primary": buttonType === "BUTTON_PRIMARY",
@@ -19,7 +20,7 @@ function Button({
 
   return (
     <button
-      className={cx("btn", btn_class)}
+      className={cx("btn", btn_class, className)}
       onClick={onClick}
       type={type}
       disabled={disabled}
