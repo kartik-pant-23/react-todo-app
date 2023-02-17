@@ -1,6 +1,8 @@
 import React from "react";
 import SubTaskInputItem from "./components/subTaskInputItem";
 
+import "./SubTasks.css";
+
 function SubTasks({
   subTasks,
   onAddNewSubTask,
@@ -8,7 +10,7 @@ function SubTasks({
   onDeleteSubTask,
 }) {
   return (
-    <div className='container border rounded p-2 mt-2'>
+    <div className='subtasks-container container border rounded p-2 mt-2'>
       {subTasks.map((subTask, idx) => (
         <SubTaskInputItem
           key={subTask.id}
@@ -21,7 +23,7 @@ function SubTasks({
 
       <button
         type='button'
-        className='btn-tonal rounded'
+        className='btn btn-sm btn-tonal rounded'
         onClick={onAddNewSubTask}
       >
         <i className='fa fa-circle-plus'></i> Add new Sub-Task

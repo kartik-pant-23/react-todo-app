@@ -2,8 +2,12 @@ import React from "react";
 import "./TaskItem.css";
 import SubTaskItem from "./components/subTaskItem";
 
+import Button from "../../../../../../components/button";
+
 import _map from "lodash/map";
 import _get from "lodash/get";
+
+import classNames from "classnames";
 
 function TaskItem({ task, onDeleteTask, onUpdateTask }) {
   const handleUpdateSubTask = (newSubTask) => {
@@ -16,15 +20,19 @@ function TaskItem({ task, onDeleteTask, onUpdateTask }) {
     });
   };
 
+  const priorityStyles = {
+    low: "low",
+    medium: "medium",
+    high: "high",
+  };
+  const _classNames = classNames.bind(priorityStyles);
+
   return (
-    <div
-      className={`col-lg-4 col-md-6 col-sm-12 ${
-        task.completed ? "task_item--checked text-muted" : ""
-      }`}
-    >
+    // <div className='col-lg-4 col-md-6 col-sm-12'>
+    <div className='task-container'>
       <div className='card border-0'>
         <div className='card-body'>
-          <div className='d-flex align-items-center'>
+          <div className='card-body--header d-flex align-items-start'>
             <input
               type='checkbox'
               name='checked'
@@ -37,14 +45,31 @@ function TaskItem({ task, onDeleteTask, onUpdateTask }) {
                 })
               }
             />
-            <h5 className='card-title text-capitalize m-0 ms-2'>
+
+            <h5
+              className={`card-title text-capitalize m-0 ms-2 ${classNames({
+                "text-muted task_item--checked": _get(task, "completed"),
+              })}`}
+            >
               {task.title}
             </h5>
           </div>
+
+          <div
+            className={classNames(
+              "priority",
+              `priority-${_classNames({
+                [_get(task, "priority")]: true,
+              })}`
+            )}
+          >
+            {task.priority}
+          </div>
+
           <p className='card-text text-muted my-2'>
             {task.description || "No description added"}
           </p>
-          <div>
+          <div className='subtask-section'>
             {_map(_get(task, "subTasks"), (subTask) => (
               <SubTaskItem
                 subTask={subTask}
@@ -53,13 +78,14 @@ function TaskItem({ task, onDeleteTask, onUpdateTask }) {
               />
             ))}
           </div>
-          <button
-            className='btn btn-outline-danger btn-sm mt-3'
-            onClick={() => onDeleteTask(task.id)}
-          >
-            Delete
-          </button>
         </div>
+        <Button
+          buttonText='Delete'
+          onClick={() => onDeleteTask(task.id)}
+          buttonType='BUTTON_OUTLINE_DANGER'
+          className='task-item-btn'
+          isButtonSmall={true}
+        />
       </div>
     </div>
   );

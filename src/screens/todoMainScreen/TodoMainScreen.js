@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Navbar from "./components/navbar";
-import AddTodo from "./components/addTodo";
 import TasksList from "./components/tasksList";
 import SideNav from "./components/sidenav";
 
@@ -12,9 +11,19 @@ import _get from "lodash/get";
 import _map from "lodash/map";
 import _size from "lodash/size";
 
+import "./TodoMainScreen.css";
+
 function TodoMainScreen() {
   const [tasks, setTasks] = useState([]);
-  const [isSideNavExpanded, setIsSideNavExpanded] = useState(true);
+  const [isSideNavExpanded, setIsSideNavExpanded] = useState(
+    window.innerWidth > 800
+  );
+  const [priorityFilter, setPriorityFilter] = useState({
+    all: true,
+    high: false,
+    medium: false,
+    low: false,
+  });
 
   const handleAddNewTask = (task) => {
     setTasks((prevTasks) => [
@@ -24,6 +33,16 @@ function TodoMainScreen() {
       },
       ...prevTasks,
     ]);
+  };
+
+  const handleChangePriorityFilter = (priority) => {
+    setPriorityFilter((prevPriorityFilter) => {
+      const newPriorityFilter = {};
+      Object.keys(prevPriorityFilter).forEach((filterValue) => {
+        newPriorityFilter[filterValue] = priority === filterValue;
+      });
+      return newPriorityFilter;
+    });
   };
 
   const handleSideNavStateChanged = (expanded) => {
@@ -58,7 +77,15 @@ function TodoMainScreen() {
   };
 
   const handleDeleteCompletedTasks = () => {
-    setTasks((prevTasks) => _reject(prevTasks, "completed"));
+    setTasks((prevTasks) =>
+      _reject(
+        prevTasks,
+        (value) =>
+          _get(value, "completed") &&
+          (_get(priorityFilter, "all") ||
+            _get(priorityFilter, _get(value, "priority")))
+      )
+    );
   };
 
   return (
@@ -69,21 +96,29 @@ function TodoMainScreen() {
       />
 
       <div className='app-body row g-0'>
-        {isSideNavExpanded ? (
+        {isSideNavExpanded && (
           <div className='col-md-3 col-sm-6 col-xsm-12'>
-            <SideNav onAddNewTask={handleAddNewTask} />
+            <SideNav
+              onAddNewTask={handleAddNewTask}
+              priorityFilter={priorityFilter}
+              onChangePriorityFilter={handleChangePriorityFilter}
+            />
           </div>
-        ) : (
-          <div></div>
         )}
 
         <div
           className={`${
-            isSideNavExpanded ? "col-md-9 col-sm-6 col-xsm-12" : "col-xsm-12"
+            isSideNavExpanded ? "col-md-9 col-sm-6 col-xsm-12" : "col-md-12"
           }`}
         >
           <TasksList
-            tasks={tasks}
+            tasks={_filter(
+              tasks,
+              (task) =>
+                _get(priorityFilter, "all") ||
+                _get(priorityFilter, _get(task, "priority"))
+            )}
+            priorityFilter={priorityFilter}
             onDeleteTask={handleDeleteTask}
             onDeleteCompletedTasks={handleDeleteCompletedTasks}
             onUpdateTask={handleUpdateTask}
@@ -93,21 +128,5 @@ function TodoMainScreen() {
     </div>
   );
 }
-
-// <div className='main-content container mx-auto'>
-//   <div className='row g-2'>
-//     <div className='col-md-4'>
-//       <AddTodo onAddNewTask={handleAddNewTask} />
-//     </div>
-//     <div className='col'>
-//       <TasksList
-//         tasks={tasks}
-//         onDeleteTask={handleDeleteTask}
-//         onDeleteCompletedTasks={handleDeleteCompletedTasks}
-//         onUpdateTask={handleUpdateTask}
-//       />
-//     </div>
-//   </div>
-// </div>
 
 export default TodoMainScreen;

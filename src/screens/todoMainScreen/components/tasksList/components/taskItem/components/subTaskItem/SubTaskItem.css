@@ -1,0 +1,12 @@
+.subtask {
+  margin: 0.5rem 0 0 0.75rem;
+}
+
+.subtask-body {
+  display: flex;
+  align-items: flex-start;
+}
+.subtask-body > p {
+  margin: 0;
+  margin-left: 0.25rem;
+}

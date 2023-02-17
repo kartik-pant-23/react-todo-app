@@ -1,0 +1,28 @@
+.app-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  padding: 0.75rem 0;
+  height: 28px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+  margin: 0;
+}
+
+.app-nav button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.app-nav > div {
+  display: flex;
+  align-items: center;
+}
+
+.app-nav a {
+  text-decoration: none;
+  padding: 0;
+  color: black;
+  font-size: 1.25rem;
+}

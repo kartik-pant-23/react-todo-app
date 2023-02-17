@@ -1,13 +1,17 @@
 import React from "react";
 
+import classNames from "classnames";
+
+import "./SubTaskItem.css";
+
 function SubTaskItem({ subTask, onUpdateSubTask }) {
   return (
     <div
-      className={`ms-3 mt-1 ${
-        subTask.completed ? "task_item--checked text-muted" : ""
-      }`}
+      className={`subtask ms-3 mt-1 ${classNames({
+        "text-muted task_item--checked": subTask.completed,
+      })}`}
     >
-      <div className='d-flex align-items-start text-sm'>
+      <div className='subtask-body d-flex align-items-start text-sm mt-2'>
         <input
           className='me-2 mt-2'
           type='checkbox'
@@ -19,7 +23,7 @@ function SubTaskItem({ subTask, onUpdateSubTask }) {
             })
           }
         />
-        <p className='text-justify'>{subTask.title}</p>
+        <p className='mb-0 text-justify'>{subTask.title}</p>
       </div>
     </div>
   );
